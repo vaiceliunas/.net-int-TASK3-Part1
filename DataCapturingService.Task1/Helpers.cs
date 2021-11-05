@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DataCapturingService.Task1
@@ -31,5 +32,18 @@ namespace DataCapturingService.Task1
 
             return false;
         }
+
+        public static void InitializeStatusSender(CancellationToken token)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    Thread.Sleep(RabbitMqActions.StatusSendingRate);
+                    RabbitMqActions.SendServiceStatus();
+                }
+            }, token);
+        }
     }
+
 }

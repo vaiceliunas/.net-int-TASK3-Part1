@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MainProcessingService.Task1
 {
     public static class Helpers
     {
+
         private static readonly Dictionary<string,List<byte[]>> TempChunksList = new Dictionary<string, List<byte[]>>();
         public static byte[] Combine(params byte[][] arrays)
         {
@@ -33,7 +35,18 @@ namespace MainProcessingService.Task1
             var result = Helpers.Combine(TempChunksList[fileId].ToArray());
             File.WriteAllBytes(Constants.Path + "\\" + currentFileName, result);
             TempChunksList.Remove(fileId);
+        }
 
+        public static void InitializeStatusSender(CancellationToken token)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    Thread.Sleep(RabbitMqActions.StatusSendingRate);
+                    RabbitMqActions.SendServiceStatus();
+                }
+            }, token);
         }
     }
 }

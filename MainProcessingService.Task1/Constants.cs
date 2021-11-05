@@ -12,8 +12,11 @@ namespace MainProcessingService.Task1
         public const string Password = "mainProcessingService";
         public const string ExchangeName = "fileTransferExchange";
         public const string QueueName = "fileTransferQueue";
+        public const string GetInstructionsQueueName = "ProcessingServiceGetInstructions";
         public const string RabbitMqAddress = "localhost:5672";
         public const string Path = "C:\\Users\\Arnas_Vaiceliunas\\Documents\\_processingService";
         public const string RoutingKey = "transfer.all";
+        public const string GetStatusRoutingKey = "status.get";
+        public const string GetInstructionsRoutingKey = "central.instructions";
     }
 }

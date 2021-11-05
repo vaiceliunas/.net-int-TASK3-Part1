@@ -12,6 +12,7 @@ namespace DataCapturingService.Task1
     public static class WatcherActions
     {
         public static FileSystemWatcher Watcher;
+        public static bool IsWatcherInUse = false;
         public static void InitializeWatcher(string path, string filter)
         {
             if (!System.IO.Directory.Exists(path))
@@ -32,13 +33,14 @@ namespace DataCapturingService.Task1
 
         public static void OnCreated(object sender, FileSystemEventArgs e)
         {
-            string filePath = e.FullPath;
-            string fileName = System.IO.Path.GetFileName(filePath);
+            WatcherActions.IsWatcherInUse = true;
+            var filePath = e.FullPath;
+            var fileName = System.IO.Path.GetFileName(filePath);
 
-            FileInfo fileInfo = new FileInfo(filePath);
+            var fileInfo = new FileInfo(filePath);
             while (Helpers.IsFileLocked(fileInfo))
             {
-                Thread.Sleep(500);
+                Thread.Sleep(50);
             }
 
             var connection = RabbitMqActions.GetRabbitMqConnection();
@@ -53,7 +55,13 @@ namespace DataCapturingService.Task1
             {
                 channel.Close();
                 connection.Close();
+                WatcherActions.IsWatcherInUse = false;
             }
+        }
+
+        public static bool IsWatcherBusy()
+        {
+            return WatcherActions.IsWatcherInUse;
         }
     }
 }

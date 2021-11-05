@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using RabbitMQ.Client.Events;
+using System.Threading.Tasks;
 
 namespace MainProcessingService.Task1
 {
@@ -13,6 +15,9 @@ namespace MainProcessingService.Task1
         private static void Main()
         {
             RabbitMqActions.InitializeQueue();
+            RabbitMqActions.InitializeGetInstructionsQueue();
+            Helpers.InitializeStatusSender(RabbitMqActions.Token);
+
             Console.ReadLine();
         }
     }
