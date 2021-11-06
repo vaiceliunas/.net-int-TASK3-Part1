@@ -12,7 +12,7 @@ namespace MainProcessingService.Task1
     {
         private static void Main()
         {
-            RabbitMqActions.InitializeQueue();
+            RabbitMqActions.InitializeTransferQueue();
             Console.ReadLine();
         }
     }

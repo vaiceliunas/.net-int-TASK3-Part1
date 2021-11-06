@@ -21,7 +21,7 @@ namespace MainProcessingService.Task1
             return factory.CreateConnection();
         }
 
-        public static void InitializeQueue()
+        public static void InitializeTransferQueue()
         {
             var connection = RabbitMqActions.GetRabbitMqConnection();
             var channel = connection.CreateModel();

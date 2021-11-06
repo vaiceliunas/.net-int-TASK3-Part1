@@ -14,6 +14,6 @@ namespace DataCapturingService.Task1
         public const string RabbitMqAddress = "localhost:5672";
         public const string Path = "C:\\Users\\Arnas_Vaiceliunas\\Documents\\_capturingService";
         public const string Filter = "*.*";
-        public const string RoutingKey = "transfer.all";
+        public const string RoutingKey = "file.transfer";
     }
 }
