@@ -7,7 +7,7 @@ namespace CentralizedControlService.Task1
         static void Main(string[] args)
         {
 
-            RabbitMqActions.InitializeQueue();
+            RabbitMqActions.InitializeTransferQueue();
             Console.WriteLine("Centralized service is running now");
             Console.WriteLine("In case you want to cancel, press Q");
             Console.WriteLine("Else, insert number between 1000 and 5000 ms (defines how often should services send their status)");

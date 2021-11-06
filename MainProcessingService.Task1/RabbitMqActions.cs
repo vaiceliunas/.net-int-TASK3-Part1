@@ -27,13 +27,13 @@ namespace MainProcessingService.Task1
             return factory.CreateConnection();
         }
 
-        public static void InitializeQueue()
+        public static void InitializeTransferQueue()
         {
             var connection = RabbitMqActions.GetRabbitMqConnection();
             var channel = connection.CreateModel();
 
             channel.QueueDeclare(Constants.QueueName, false, false);
-            channel.QueueBind(Constants.QueueName, Constants.ExchangeName, Constants.RoutingKey);
+            channel.QueueBind(Constants.QueueName, Constants.ExchangeName, Constants.TransferRoutingKey);
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (sender, eventArgs) =>

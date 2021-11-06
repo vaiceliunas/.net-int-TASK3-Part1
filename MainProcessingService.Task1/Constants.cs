@@ -15,8 +15,8 @@ namespace MainProcessingService.Task1
         public const string GetInstructionsQueueName = "ProcessingServiceGetInstructions";
         public const string RabbitMqAddress = "localhost:5672";
         public const string Path = "C:\\Users\\Arnas_Vaiceliunas\\Documents\\_processingService";
-        public const string RoutingKey = "transfer.all";
-        public const string GetStatusRoutingKey = "status.get";
-        public const string GetInstructionsRoutingKey = "central.instructions";
+        public const string TransferRoutingKey = "file.transfer";
+        public const string GetStatusRoutingKey = "service.status";
+        public const string GetInstructionsRoutingKey = "central.params";
     }
 }

@@ -16,8 +16,8 @@ namespace CentralizedControlService.Task1
         public const string Path = "C:\\Users\\Arnas_Vaiceliunas\\Documents\\_capturingService";
         public const string ServiceStatusesTxtPath = "C:\\Users\\Arnas_Vaiceliunas\\Documents\\_centralizedService\\StatusOfServices.txt";
         public const string Filter = "*.*";
-        public const string TransferRoutingKey = "transfer.all";
-        public const string GetStatusRoutingKey = "status.get";
-        public const string GetInstructionsRoutingKey = "central.instructions";
+        public const string TransferRoutingKey = "file.transfer";
+        public const string GetStatusRoutingKey = "service.status";
+        public const string GetInstructionsRoutingKey = "central.params";
     }
 }
